@@ -1,0 +1,34 @@
+@font-face {
+    font-family: jeepney;
+    src: url(JEEPNEY.TTF)
+  }
+  
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5dc; /* beige */
+  }
+  canvas {
+    display: block;
+    margin: auto;
+    margin-top: 16%;
+  }
+  
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+
+  h6{
+    font-family: jeepney;
+    font-size: 80%;
+    margin: 0;
+    color: inherit;
+    margin-top: 5%;
+    color: #c83e34;
+    text-align: center; 
+  }

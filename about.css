@@ -1,0 +1,43 @@
+@font-face {
+  font-family: jeepney;
+  src: url(JEEPNEY.TTF)
+}
+
+body {
+    background-color: beige;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h1 {
+    font-family: jeepney;
+    font-size: 600%;
+    margin: 0;
+    margin-top: 15%;
+    color: inherit;
+    color: #c83e34;
+  }
+
+  h3{
+    font-family: jeepney;
+    font-size: 150%;
+    margin: 0;
+    color: inherit;
+    color: #c83e34;
+    text-align: center;
+  }
+
+  h6{
+    font-family: jeepney;
+    font-size: 80%;
+    margin: 0;
+    color: inherit;
+    margin-top: 5%;
+    color: #c83e34;
+    text-align: center; 
+  }
