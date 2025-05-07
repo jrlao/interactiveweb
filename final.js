@@ -12,7 +12,7 @@ let instructionsFontSize = 20;
 let mainFontSize = 100;
 
 function setup() {
-  createCanvas(1440, 770);
+  createCanvas(1420, 770);
   textFont('jeepney');
   textAlign(CENTER, CENTER);
   noStroke();
@@ -25,7 +25,6 @@ function setup() {
 function draw() {
   background("#f5f5dc");
 
-  // Update falling position
   vy += gravity;
   y += vy;
 
@@ -34,23 +33,19 @@ function draw() {
     vy = 0;
   }
 
-  // Main text
   textSize(mainFontSize);
   fill(80);
   text(mainText, width / 2, y);
 
-  // Glitch layers
   for (let g of glitchLayers) {
     fill(g.gray);
     text(mainText, width / 2 + g.xOffset, y + g.yOffset);
   }
 
-  // Instruction text
   textSize(instructionsFontSize);
   fill(100);
   text("click mabuhay to uplift it or click here to bring mabuhay life again", width / 2, height - 40);
 
-  // Update glitch occasionally
   glitchTimer++;
   if (glitchTimer > glitchInterval) {
     generateGlitch();
@@ -59,7 +54,6 @@ function draw() {
 }
 
 function mousePressed() {
-  // Check if user clicked the instruction text area
   if (mouseY > height - 60 && mouseY < height - 20) {
     window.location.href = "index.html";
   } else {
