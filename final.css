@@ -9,21 +9,10 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #f5f5dc;
+  background-color: beige;
 }
 
 canvas {
   display: block;
   margin: auto;
-  margin-top: 11%;
-}
-
-h6{
-  font-family: jeepney;
-  font-size: 80%;
-  margin: 0;
-  color: inherit;
-  margin-top: 5%;
-  color: #c83e34;
-  text-align: center; 
 }

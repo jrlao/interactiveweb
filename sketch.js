@@ -1,85 +1,85 @@
-let bgImage; 
-let hoverText = "";
-let fontSize = 64;
-let textColor = "#c83e34";
-let messages = [];
-let hover = false;
+let mainText = "mabuhay or mabuhay?";
+let words = [
+  "nahihirapan ka na ba?",
+  "are you having a hard time?",
+  "hello!",
+  "the will to live?"
+];
 
-function preload() {
-  bgImage = loadImage("img/manila.jpg"); 
-}
+let wordObjects = [];
+let centerArea = 200;
 
 function setup() {
-  createCanvas(1240, 680);
+  createCanvas(1440, 779);
   textAlign(CENTER, CENTER);
   textFont('jeepney');
-
-  messages.push({ x: width / 2, y: height / 2, size: 64, color: '#c83e34' });
-
-
-  let attempts = 0;
-  let desired = 50; 
-  while (messages.length < desired + 1 && attempts < 5000) {
-    let x = random(150, width - 150);
-    let y = random(150, height - 150);
-    let size = 24;
-    let ok = true;
-
-    for (let m of messages) {
-      let d = dist(x, y, m.x, m.y);
-      if (d < (m.size / 2 + size / 2 + 200)) { 
-        ok = false;
-        break;
-      }
-    }
-
-    if (ok) {
-      messages.push({
-        x: x,
-        y: y,
-        size: size,
-        color: random(['#DAA520', '#8EB9E3'])
-      });
-    }
-
-    attempts++;
-  }
 }
 
 function draw() {
-  function draw() {
-    background(bgImage); 
-    fill(textColor);
+  background('#F5F5DC'); // beige
 
-    drawArrows();
-  }
-  hover = false;
+  // Draw center text
+  fill('#C83E34');
+  textSize(64);
+  text(mainText, width / 2, height / 2);
 
-  for (let m of messages) {
-    fill(m.color);
-    textSize(m.size);
-    text("mabuhay?", m.x, m.y);
-
-    if (dist(mouseX, mouseY, m.x, m.y) < m.size) {
-      hover = true;
-    }
+  // Draw existing words
+  for (let wordObj of wordObjects) {
+    fill(wordObj.color);
+    textSize(20);
+    text(wordObj.text, wordObj.x, wordObj.y);
   }
 
-  function setup() {
-    createCanvas(800, 400);
-    textFont(jeepneyFont);
-    textSize(fontSize);
-    textAlign(LEFT, CENTER);
-    bgImage.resize(800, 400); 
-  }
-  
-  if (hover) {
-    fill(50);
-    textSize(18);
-    text("nahihirapan ka na ba?\nare you having a hard time?", width / 2, height - 60);
-  }
+  // Instructions at bottom
+  fill(100);
+  textSize(14);
+  text("click around the page", width / 2, height - 40);
+
+  // Left arrow
+  drawArrow(40, height - 30, -1);
+
+  // Right arrow
+  drawArrow(width - 40, height - 30, 1);
 }
 
 function mousePressed() {
-  window.location.href = "final.html"; 
+  // Check for arrow click
+  if (mouseY > height - 50 && mouseY < height - 10) {
+    if (mouseX < 80) {
+      console.log(window.location.href = "pageone.html");
+      // Add navigation logic here
+      return;
+    } else if (mouseX > width - 80) {
+      console.log(window.location.href = "final.html");
+      // Add navigation logic here
+      return;
+    }
+  }
+
+  // Avoid placing near center
+  if (dist(mouseX, mouseY, width / 2, height / 2) < centerArea) return;
+
+  let randomWord = random(words);
+  let randomColor = random(['#8EB9E3', '#DAA520']);
+
+  wordObjects.push({
+    text: randomWord,
+    x: mouseX,
+    y: mouseY,
+    color: randomColor
+  });
+}
+
+function drawArrow(x, y, dir) {
+  push();
+  translate(x, y);
+  stroke(100);
+  strokeWeight(2);
+  fill(100);
+  if (dir === -1) {
+    triangle(0, -5, -10, 0, 0, 5); // left arrow
+  } else {
+    triangle(0, -5, 10, 0, 0, 5); // right arrow
+  }
+  pop();
 }

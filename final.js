@@ -1,17 +1,19 @@
 let mainText = "mabuhay!";
 let glitchLayers = [];
 let glitchTimer = 0;
-let glitchInterval = 15;
+let glitchInterval = 20;
 
-let y; 
-let vy; 
-let gravity = 0.2;
-let bounce = -10;
+let y;
+let vy;
+let gravity = 0.1;
+let bounce = -5;
+
+let instructionsFontSize = 20;
+let mainFontSize = 100;
 
 function setup() {
-  createCanvas(800, 400);
-  textFont("jeepney");
-  textSize(100);
+  createCanvas(1440, 770);
+  textFont('jeepney');
   textAlign(CENTER, CENTER);
   noStroke();
   generateGlitch();
@@ -23,27 +25,32 @@ function setup() {
 function draw() {
   background("#f5f5dc");
 
-
+  // Update falling position
   vy += gravity;
   y += vy;
 
-
-  if (y > height - 50) {
-    y = height - 50;
+  if (y > height - 100) {
+    y = height - 100;
     vy = 0;
   }
 
-
-  fill("#c83e34");
+  // Main text
+  textSize(mainFontSize);
+  fill(80);
   text(mainText, width / 2, y);
 
-
+  // Glitch layers
   for (let g of glitchLayers) {
-    fill(g.color);
+    fill(g.gray);
     text(mainText, width / 2 + g.xOffset, y + g.yOffset);
   }
 
+  // Instruction text
+  textSize(instructionsFontSize);
+  fill(100);
+  text("click mabuhay to uplift it or click here to bring mabuhay life again", width / 2, height - 40);
 
+  // Update glitch occasionally
   glitchTimer++;
   if (glitchTimer > glitchInterval) {
     generateGlitch();
@@ -52,18 +59,22 @@ function draw() {
 }
 
 function mousePressed() {
-
-  vy = bounce;
+  // Check if user clicked the instruction text area
+  if (mouseY > height - 60 && mouseY < height - 20) {
+    window.location.href = "index.html";
+  } else {
+    vy = bounce;
+  }
 }
 
 function generateGlitch() {
   glitchLayers = [];
-  let count = int(random(2, 5));
+  let count = int(random(2, 4));
   for (let i = 0; i < count; i++) {
     glitchLayers.push({
-      xOffset: random(-5, 5),
-      yOffset: random(-5, 5),
-      color: color(random(255), random(255), random(255), 80)
+      xOffset: random(-4, 4),
+      yOffset: random(-4, 4),
+      gray: color(random(50, 200), 80)
     });
   }
 }
